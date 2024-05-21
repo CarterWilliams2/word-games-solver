@@ -9,30 +9,22 @@ public class WordHuntSolver{
    private int height;
 
    public WordHuntSolver() {
-      initializeBoard();
-      width = gameBoard.length;
-      height = width;
+      width = 4;
+      height = 4;
+      gameBoard= new String[width][height];
    }
    
-   //this sets the game board to be null in all indexes
-   public void initializeBoard() {
-      for (int i=0; i<4; i++) {
-         for (int j=0; j<4; j++) {
-            gameBoard[i][j] = null;
-         }
-      }
-   }
    
    //this allows the game board to be set by the user
    public void setBoard(String[] letters) {
       if (letters.length != 16) {
          return;
       }
-      for (int i=0; i<16; i++) {
+      int index = 0;
+      for (int i=0; i<4; i++) {
          for (int j=0; j<4; j++) {
-            for (int k=0; k<4; k++) {
-               gameBoard[j][k] = letters[i];
-            }
+            gameBoard[i][j] = letters[index];
+            index++;
          }
       }
    }
