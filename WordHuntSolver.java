@@ -1,5 +1,8 @@
 import java.io.FileReader;
 import java.io.File;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.util.TreeSet;
 
 public class WordHuntSolver{
 
@@ -7,11 +10,15 @@ public class WordHuntSolver{
    private String[][] gameBoard;
    private int width;
    private int height;
+   private boolean dictLoaded;
+   private TreeSet<String> dict;
+   private String filename = "words.txt";
 
    public WordHuntSolver() {
       width = 4;
       height = 4;
       gameBoard= new String[width][height];
+      loadDict();
    }
    
    
@@ -27,5 +34,28 @@ public class WordHuntSolver{
             index++;
          }
       }
+   }
+   
+   public void loadDict() {
+   
+      dict = new TreeSet<String>();
+      
+      try {
+         Scanner dictScan = new Scanner(new BufferedReader(new FileReader(new File(filename))));
+         
+         while (dictScan.hasNext()) {
+            String word = dictScan.next().toUpperCase();
+            dict.add(word);
+            dictScan.next();
+         }
+         dictLoaded = true;
+      }
+      
+      catch (java.io.FileNotFoundException e) {
+         throw new IllegalArgumentException("File cannot be opened");
+      } 
+   
+      
+      System.out.println("Loaded");
    }
 }
